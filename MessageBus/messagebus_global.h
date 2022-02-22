@@ -1,0 +1,12 @@
+#ifndef MESSAGEBUS_GLOBAL_H
+#define MESSAGEBUS_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(MESSAGEBUS_LIBRARY)
+#  define MESSAGEBUSSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define MESSAGEBUSSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // MESSAGEBUS_GLOBAL_H
