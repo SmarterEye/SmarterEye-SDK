@@ -506,6 +506,8 @@ bool StereoCameraImpl::requestDeviceInfo(DeviceInfo &deviceInfo)
         return false;
     }
 
+    mRtdbReceiver->request();
+    QThread::msleep(200);
     QString stDeviceInfo1 = mRtdbReceiver->getRtdbValueByName("HardwareVersion").toString();
     QString stDeviceInfo2 = mRtdbReceiver->getRtdbValueByName("SerialNum").toString();
     QString stDeviceInfo3 = mRtdbReceiver->getRtdbValueByName("ProductCode").toString();
