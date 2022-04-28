@@ -1,0 +1,7 @@
+<launch>
+
+    <include file="$(find zkhy_stereo_d)/launch/zkhy_stereo.launch"/>
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find zkhy_stereo_d)/rviz/zkhy_stereo.rviz" output="screen"/>
+
+</launch>

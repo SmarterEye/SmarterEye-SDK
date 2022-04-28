@@ -3,7 +3,7 @@
 #include <iostream>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
-
+#include <opencv2/imgproc/types_c.h>
 #include "satpext.h"
 #include "frameid.h"
 #include "frameformat.h"

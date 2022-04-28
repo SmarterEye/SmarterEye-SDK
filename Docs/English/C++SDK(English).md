@@ -19,6 +19,9 @@ Online date | Version number | Update content
 2020.02.10 | 0.2.25 | Added PointCloudDemo, GetMotionDataDemo and related interfaces, adjusted DisplayFramesDemo
 2020.03.23 | 0.2.26 | Fix bugs: GetMotionDataDemo, PointCloudDemo, optimize lane line drawing
 2022.02.15 | 0.2.33 | Added GetDeviceInfoDemo and description;
+2022.03.15 | 0.2.34 | Add compiling and running environment configuration method 
+2022.04.06 | 0.2.35 | Add ROS environment configuration under Ubuntu 18.04 LTS and method of using ROS wrapper package 
+2022.04.11 | 0.2.36 | Add Ubuntu 20.04 LTS configuration 
 
 # Introduction
 
@@ -80,7 +83,9 @@ At present, all shipped devices have completed the calibration process and are i
 
 ## Install SmartEye SDK
 
-#### SmartEye SDK directory structure
+1. Download from the official website or provide the specified C + + SDK compressed package by FAE.
+2. Unzip the downloaded package, which contains the SDK implementation code and related demo.
+3. SmartEye SDK directory structure
 
 ```bash
 Sdk-Release_linux-g++_v0.2.33
@@ -104,31 +109,1559 @@ Sdk-Release_linux-g++_v0.2.33
 └── SatpExt
 ````
 
+## Compiling and runnng environment
+
 #### Minimum C++11+ support
+
 #### Minimum CMake 3.0 support
-#### Qt: Linux - 5.12; Windows - 5.13
+#### Qt: Linux - 5.12; Windows - 5.12
 
-#### OpenCV: 3.4.1
+#### OpenCV: 3.4.1, 4.5.1
 
-#### The steps to use the development package directly are as follows:
+#### PCL:1.9.0, 1.12.0
 
-1. Download from the official website or provide the specified C + + SDK compressed package by FAE.
 
-2. Unzip the downloaded package, which contains the SDK implementation code and related demo.
 
-3. Execute build. Under the scripts path SH script to compile.
+## Compiling and running environment configuration
 
-4. The compiled SDK module and demo program are automatically stored in `/sdkrelease_vX.X.X/Runtime/bin ` path.
+### Windows 10（64bit）
 
-5. Add the path of the library file to the environment variable,
+####  Install Visual Studio 2017
 
-   eg：`export LD_ LIBRARY_ PATH=/root/adas/SdkRelease_vX.X.X/Runtime/Bin`.
+#### Install Qt5.12
 
-6. If the machine has QT installed by default, please delete the default QT directory.
+#### Install OpenCV 
 
-7. Then run the corresponding demo, eg: `./StereoCameraDemo`.
+1. Download and install cmake3.20
+
+2. Download and install opencv-3.4.1-vc14_vc15.exe
+
+  **Note：Although the windows environment has a precompiled release version of the library, it does not contain a debug version of the library. Therefore, before developing opencv, you need to open the solution and compile those libraries yourself.**
+
+3. Compiling，as shown in the figure below
+
+   <div align = 'center'>
+
+ ![img](ImageFolder/fig1.png)
+
+</div>
+
+<div align = 'center'>
+    Fig1
+</div>
+
+
+
+then , open the project with Visual Studio 2017 , and compile it.
+
+4. Setting Environment variables button, click to enter "this computer"->"property"->"advance setting", as shown in the figure
+
+ <div align = 'center'>
+
+![img](ImageFolder/fig2.png)
+
+</div>
+
+<div align = 'center'>
+    Fig2
+</div>
+
+
+
+click environment variable , as shown in the figure
+
+ <div align = 'center'>
+
+![img](ImageFolder/fig3.png)
+
+</div>
+
+<div align = 'center'>
+    Fig3
+</div>
+
+
+
+
+
+5. Configure OpenCV in the Visual Studio 2017
+
+​       New empty project , and click to enter Property Manager, as shown in the figure
+
+<div align = 'center'>
+
+![img](ImageFolder/fig4.png)
+
+</div>
+
+<div align = 'center'>
+      Fig4
+</div>
+
+​      double click Microsoft.Cpp.x64.user, enter property page
+
+ <div align = 'center'>
+
+
+
+![img](ImageFolder/fig5.png)
+
+ </div>
+
+<div align = 'center'>
+    Fig5
+</div>
+
+
+
+
+modify Include Directories ，as shown in the figure
+
+<div align = 'center'>
+
+![img](ImageFolder/fig6.png)
+
+</div>
+
+<div align = 'center'>
+    Fig6
+</div>
+
+
+modify Library Directories，as shown in the figure
+
+<div align = 'center'>
+
+
+
+![img](ImageFolder/fig7.png)
+
+</div>
+
+<div align = 'center'>
+    Fig7
+</div>
+
+
+
+add Additional Dependencies，as shown in the figure
+
+ <div align = 'center'>
+
+
+
+![img](ImageFolder/fig8.png)
+
+ </div>
+
+<div align = 'center'>
+    Fig8
+</div>
+
+
+
+if it is configured as Release,  just choose opencv_world341.lib.
+
+This completes the configuration.
+
+ 
+
+#### Install PCL (Pont Cloud library )
+
+1. Download and install PCL-1.9.0-AllInOne-msvc2017-win64.exe，download and extract pcl-1.9.0-pdb-msvc2017-win64.zip，add the contents of the extracted folder to your PCL installation directory D:\PCL 1.9.0\bin
+
+2. Visual Studio 2017 configure PCL1.9.0
+
+​       Setting system envirnment variables , as shown in the figure 
+
+ <div align = 'center'>
+
+
+
+![img](ImageFolder/fig9.png)
+
+ </div>
+
+<div align = 'center'>
+    Fig9
+</div>
+
+
+
+open Visual Studio and newly build empty project ,  click to newly build Property sheet in the Property Manager, as shown in the figure 
+
+ <div align = 'center'>
+
+
+
+![img](ImageFolder/fig10.png)
+
+ </div>
+
+<div align = 'center'>
+    Fig10
+</div>
+
+
+
+
+
+this can add a Property sheet in the corresponding Property Manager，as shown in the figure
+
+ <div align = 'center'>
+
+
+
+![img](ImageFolder/fig11.png)
+
+ </div>
+
+<div align = 'center'>
+    Fig11
+</div>
+
+
+
+
+
+double click to open property page , modify Include Directories 
+
+ <div align = 'center'>
+
+
+
+  ![img](ImageFolder/fig12.png)
+
+ </div>
+
+<div align = 'center'>
+    Fig12
+</div>
+
+
+
+modify Library Directories，as shown in the figure
+
+ <div align = 'center'>
+
+
+
+![img](ImageFolder/fig13.png)
+
+ </div>
+
+<div align = 'center'>
+    Fig13
+</div>
+
+
+
+add Additional Dependencies，as shown in the figure 
+
+ <div align = 'center'>
+
+
+
+![img](ImageFolder/fig14.png)
+
+ </div>
+
+<div align = 'center'>
+    Fig14
+</div>
+
+
+
+
+
+**Dependence Item List：**
+
+PCL:
+
+pcl_common_debug.lib
+
+pcl_common_release.lib
+
+pcl_features_debug.lib
+
+pcl_features_release.lib
+
+pcl_filters_debug.lib
+
+pcl_filters_release.lib
+
+pcl_io_debug.lib
+
+pcl_io_ply_debug.lib
+
+pcl_io_ply_release.lib
+
+pcl_io_release.lib
+
+pcl_kdtree_debug.lib
+
+pcl_kdtree_release.lib
+
+pcl_keypoints_debug.lib
+
+pcl_keypoints_release.lib
+
+pcl_ml_debug.lib
+
+pcl_ml_release.lib
+
+pcl_octree_debug.lib
+
+pcl_octree_release.lib
+
+pcl_outofcore_debug.lib
+
+pcl_outofcore_release.lib
+
+pcl_people_debug.lib
+
+pcl_people_release.lib
+
+pcl_recognition_debug.lib
+
+pcl_recognition_release.lib
+
+pcl_registration_debug.lib
+
+pcl_registration_release.lib
+
+pcl_sample_consensus_debug.lib
+
+pcl_sample_consensus_release.lib
+
+pcl_search_debug.lib
+
+pcl_search_release.lib
+
+pcl_segmentation_debug.lib
+
+pcl_segmentation_release.lib
+
+pcl_stereo_debug.lib
+
+pcl_stereo_release.lib
+
+pcl_surface_debug.lib
+
+pcl_surface_release.lib
+
+pcl_tracking_debug.lib
+
+pcl_tracking_release.lib
+
+pcl_visualization_debug.lib
+
+pcl_visualization_release.lib
+
+pcl_common_debug.lib
+
+pcl_common_release.lib
+
+pcl_features_debug.lib
+
+pcl_features_release.lib
+
+pcl_filters_debug.lib
+
+pcl_filters_release.lib
+
+pcl_io_debug.lib
+
+pcl_io_ply_debug.lib
+
+pcl_io_ply_release.lib
+
+pcl_io_release.lib
+
+pcl_kdtree_debug.lib
+
+pcl_kdtree_release.lib
+
+pcl_keypoints_debug.lib
+
+pcl_keypoints_release.lib
+
+pcl_ml_debug.lib
+
+pcl_ml_release.lib
+
+pcl_octree_debug.lib
+
+pcl_octree_release.lib
+
+pcl_outofcore_debug.lib
+
+pcl_outofcore_release.lib
+
+pcl_people_debug.lib
+
+pcl_people_release.lib
+
+pcl_recognition_debug.lib
+
+pcl_recognition_release.lib
+
+pcl_registration_debug.lib
+
+pcl_registration_release.lib
+
+pcl_sample_consensus_debug.lib
+
+pcl_sample_consensus_release.lib
+
+pcl_search_debug.lib
+
+pcl_search_release.lib
+
+pcl_segmentation_debug.lib
+
+pcl_segmentation_release.lib
+
+pcl_stereo_debug.lib
+
+pcl_stereo_release.lib
+
+pcl_surface_debug.lib
+
+pcl_surface_release.lib
+
+pcl_tracking_debug.lib
+
+pcl_tracking_release.lib
+
+pcl_visualization_debug.lib
+
+pcl_visualization_release.lib
+
+ 
+
+VTK:
+
+vtkalglib-8.1-gd.lib
+
+vtkalglib-8.1.lib
+
+vtkChartsCore-8.1-gd.lib
+
+vtkChartsCore-8.1.lib
+
+vtkCommonColor-8.1-gd.lib
+
+vtkCommonColor-8.1.lib
+
+vtkCommonComputationalGeometry-8.1-gd.lib
+
+vtkCommonComputationalGeometry-8.1.lib
+
+vtkCommonCore-8.1-gd.lib
+
+vtkCommonCore-8.1.lib
+
+vtkCommonDataModel-8.1-gd.lib
+
+vtkCommonDataModel-8.1.lib
+
+vtkCommonExecutionModel-8.1-gd.lib
+
+vtkCommonExecutionModel-8.1.lib
+
+vtkCommonMath-8.1-gd.lib
+
+vtkCommonMath-8.1.lib
+
+vtkCommonMisc-8.1-gd.lib
+
+vtkCommonMisc-8.1.lib
+
+vtkCommonSystem-8.1-gd.lib
+
+vtkCommonSystem-8.1.lib
+
+vtkCommonTransforms-8.1-gd.lib
+
+vtkCommonTransforms-8.1.lib
+
+vtkDICOMParser-8.1-gd.lib
+
+vtkDICOMParser-8.1.lib
+
+vtkDomainsChemistry-8.1-gd.lib
+
+vtkDomainsChemistry-8.1.lib
+
+vtkexoIIc-8.1-gd.lib
+
+vtkexoIIc-8.1.lib
+
+vtkexpat-8.1-gd.lib
+
+vtkexpat-8.1.lib
+
+vtkFiltersAMR-8.1-gd.lib
+
+vtkFiltersAMR-8.1.lib
+
+vtkFiltersCore-8.1-gd.lib
+
+vtkFiltersCore-8.1.lib
+
+vtkFiltersExtraction-8.1-gd.lib
+
+vtkFiltersExtraction-8.1.lib
+
+vtkFiltersFlowPaths-8.1-gd.lib
+
+vtkFiltersFlowPaths-8.1.lib
+
+vtkFiltersGeneral-8.1-gd.lib
+
+vtkFiltersGeneral-8.1.lib
+
+vtkFiltersGeneric-8.1-gd.lib
+
+vtkFiltersGeneric-8.1.lib
+
+vtkFiltersGeometry-8.1-gd.lib
+
+vtkFiltersGeometry-8.1.lib
+
+vtkFiltersHybrid-8.1-gd.lib
+
+vtkFiltersHybrid-8.1.lib
+
+vtkFiltersHyperTree-8.1-gd.lib
+
+vtkFiltersHyperTree-8.1.lib
+
+vtkFiltersImaging-8.1-gd.lib
+
+vtkFiltersImaging-8.1.lib
+
+vtkFiltersModeling-8.1-gd.lib
+
+vtkFiltersModeling-8.1.lib
+
+vtkFiltersParallel-8.1-gd.lib
+
+vtkFiltersParallel-8.1.lib
+
+vtkFiltersParallelImaging-8.1-gd.lib
+
+vtkFiltersParallelImaging-8.1.lib
+
+vtkFiltersPoints-8.1-gd.lib
+
+vtkFiltersPoints-8.1.lib
+
+vtkFiltersProgrammable-8.1-gd.lib
+
+vtkFiltersProgrammable-8.1.lib
+
+vtkFiltersSelection-8.1-gd.lib
+
+vtkFiltersSelection-8.1.lib
+
+vtkFiltersSMP-8.1-gd.lib
+
+vtkFiltersSMP-8.1.lib
+
+vtkFiltersSources-8.1-gd.lib
+
+vtkFiltersSources-8.1.lib
+
+vtkFiltersStatistics-8.1-gd.lib
+
+vtkFiltersStatistics-8.1.lib
+
+vtkFiltersTexture-8.1-gd.lib
+
+vtkFiltersTexture-8.1.lib
+
+vtkFiltersTopology-8.1-gd.lib
+
+vtkFiltersTopology-8.1.lib
+
+vtkFiltersVerdict-8.1-gd.lib
+
+vtkFiltersVerdict-8.1.lib
+
+vtkfreetype-8.1-gd.lib
+
+vtkfreetype-8.1.lib
+
+vtkGeovisCore-8.1-gd.lib
+
+vtkGeovisCore-8.1.lib
+
+vtkgl2ps-8.1-gd.lib
+
+vtkgl2ps-8.1.lib
+
+vtkhdf5-8.1-gd.lib
+
+vtkhdf5-8.1.lib
+
+vtkhdf5_hl-8.1-gd.lib
+
+vtkhdf5_hl-8.1.lib
+
+vtkImagingColor-8.1-gd.lib
+
+vtkImagingColor-8.1.lib
+
+vtkImagingCore-8.1-gd.lib
+
+vtkImagingCore-8.1.lib
+
+vtkImagingFourier-8.1-gd.lib
+
+vtkImagingFourier-8.1.lib
+
+vtkImagingGeneral-8.1-gd.lib
+
+vtkImagingGeneral-8.1.lib
+
+vtkImagingHybrid-8.1-gd.lib
+
+vtkImagingHybrid-8.1.lib
+
+vtkImagingMath-8.1-gd.lib
+
+vtkImagingMath-8.1.lib
+
+vtkImagingMorphological-8.1-gd.lib
+
+vtkImagingMorphological-8.1.lib
+
+vtkImagingSources-8.1-gd.lib
+
+vtkImagingSources-8.1.lib
+
+vtkImagingStatistics-8.1-gd.lib
+
+vtkImagingStatistics-8.1.lib
+
+vtkImagingStencil-8.1-gd.lib
+
+vtkImagingStencil-8.1.lib
+
+vtkInfovisCore-8.1-gd.lib
+
+vtkInfovisCore-8.1.lib
+
+vtkInfovisLayout-8.1-gd.lib
+
+vtkInfovisLayout-8.1.lib
+
+vtkInteractionImage-8.1-gd.lib
+
+vtkInteractionImage-8.1.lib
+
+vtkInteractionStyle-8.1-gd.lib
+
+vtkInteractionStyle-8.1.lib
+
+vtkInteractionWidgets-8.1-gd.lib
+
+vtkInteractionWidgets-8.1.lib
+
+vtkIOAMR-8.1-gd.lib
+
+vtkIOAMR-8.1.lib
+
+vtkIOCore-8.1-gd.lib
+
+vtkIOCore-8.1.lib
+
+vtkIOEnSight-8.1-gd.lib
+
+vtkIOEnSight-8.1.lib
+
+vtkIOExodus-8.1-gd.lib
+
+vtkIOExodus-8.1.lib
+
+vtkIOExport-8.1-gd.lib
+
+vtkIOExport-8.1.lib
+
+vtkIOExportOpenGL-8.1-gd.lib
+
+vtkIOExportOpenGL-8.1.lib
+
+vtkIOGeometry-8.1-gd.lib
+
+vtkIOGeometry-8.1.lib
+
+vtkIOImage-8.1-gd.lib
+
+vtkIOImage-8.1.lib
+
+vtkIOImport-8.1-gd.lib
+
+vtkIOImport-8.1.lib
+
+vtkIOInfovis-8.1-gd.lib
+
+vtkIOInfovis-8.1.lib
+
+vtkIOLegacy-8.1-gd.lib
+
+vtkIOLegacy-8.1.lib
+
+vtkIOLSDyna-8.1-gd.lib
+
+vtkIOLSDyna-8.1.lib
+
+vtkIOMINC-8.1-gd.lib
+
+vtkIOMINC-8.1.lib
+
+vtkIOMovie-8.1-gd.lib
+
+vtkIOMovie-8.1.lib
+
+vtkIONetCDF-8.1-gd.lib
+
+vtkIONetCDF-8.1.lib
+
+vtkIOParallel-8.1-gd.lib
+
+vtkIOParallel-8.1.lib
+
+vtkIOParallelXML-8.1-gd.lib
+
+vtkIOParallelXML-8.1.lib
+
+vtkIOPLY-8.1-gd.lib
+
+vtkIOPLY-8.1.lib
+
+vtkIOSQL-8.1-gd.lib
+
+vtkIOSQL-8.1.lib
+
+vtkIOTecplotTable-8.1-gd.lib
+
+vtkIOTecplotTable-8.1.lib
+
+vtkIOVideo-8.1-gd.lib
+
+vtkIOVideo-8.1.lib
+
+vtkIOXML-8.1-gd.lib
+
+vtkIOXML-8.1.lib
+
+vtkIOXMLParser-8.1-gd.lib
+
+vtkIOXMLParser-8.1.lib
+
+vtkjpeg-8.1-gd.lib
+
+vtkjpeg-8.1.lib
+
+vtkjsoncpp-8.1-gd.lib
+
+vtkjsoncpp-8.1.lib
+
+vtklibharu-8.1-gd.lib
+
+vtklibharu-8.1.lib
+
+vtklibxml2-8.1-gd.lib
+
+vtklibxml2-8.1.lib
+
+vtklz4-8.1-gd.lib
+
+vtklz4-8.1.lib
+
+vtkmetaio-8.1-gd.lib
+
+vtkmetaio-8.1.lib
+
+vtkNetCDF-8.1-gd.lib
+
+vtkNetCDF-8.1.lib
+
+vtknetcdfcpp-8.1-gd.lib
+
+vtknetcdfcpp-8.1.lib
+
+vtkoggtheora-8.1-gd.lib
+
+vtkoggtheora-8.1.lib
+
+vtkParallelCore-8.1-gd.lib
+
+vtkParallelCore-8.1.lib
+
+vtkpng-8.1-gd.lib
+
+vtkpng-8.1.lib
+
+vtkproj4-8.1-gd.lib
+
+vtkproj4-8.1.lib
+
+vtkRenderingAnnotation-8.1-gd.lib
+
+vtkRenderingAnnotation-8.1.lib
+
+vtkRenderingContext2D-8.1-gd.lib
+
+vtkRenderingContext2D-8.1.lib
+
+vtkRenderingContextOpenGL-8.1-gd.lib
+
+vtkRenderingContextOpenGL-8.1.lib
+
+vtkRenderingCore-8.1-gd.lib
+
+vtkRenderingCore-8.1.lib
+
+vtkRenderingFreeType-8.1-gd.lib
+
+vtkRenderingFreeType-8.1.lib
+
+vtkRenderingGL2PS-8.1-gd.lib
+
+vtkRenderingGL2PS-8.1.lib
+
+vtkRenderingImage-8.1-gd.lib
+
+vtkRenderingImage-8.1.lib
+
+vtkRenderingLabel-8.1-gd.lib
+
+vtkRenderingLabel-8.1.lib
+
+vtkRenderingLIC-8.1-gd.lib
+
+vtkRenderingLIC-8.1.lib
+
+vtkRenderingLOD-8.1-gd.lib
+
+vtkRenderingLOD-8.1.lib
+
+vtkRenderingOpenGL-8.1-gd.lib
+
+vtkRenderingOpenGL-8.1.lib
+
+vtkRenderingVolume-8.1-gd.lib
+
+vtkRenderingVolume-8.1.lib
+
+vtkRenderingVolumeOpenGL-8.1-gd.lib
+
+vtkRenderingVolumeOpenGL-8.1.lib
+
+vtksqlite-8.1-gd.lib
+
+vtksqlite-8.1.lib
+
+vtksys-8.1-gd.lib
+
+vtksys-8.1.lib
+
+vtktiff-8.1-gd.lib
+
+vtktiff-8.1.lib
+
+vtkverdict-8.1-gd.lib
+
+vtkverdict-8.1.lib
+
+vtkViewsContext2D-8.1-gd.lib
+
+vtkViewsContext2D-8.1.lib
+
+vtkViewsCore-8.1-gd.lib
+
+vtkViewsCore-8.1.lib
+
+vtkViewsInfovis-8.1-gd.lib
+
+vtkViewsInfovis-8.1.lib
+
+vtkzlib-8.1-gd.lib
+
+vtkzlib-8.1.lib
+
+ 
+
+
+
+
+
+Add in C/C++—>Preprocessor—>Preprocessor，as shown in the figure
+
+​     _CRT_SECURE_NO_WARNINGS
+
+​     _SCL_SECURE_NO_WARNINGS
+
+​     _SILENCE_FPOS_SEEKPOS_DEPRECATION_WARNING
+
+<div align = 'center'>
+
+![img](ImageFolder/fig15.png)
+
+</div>
+
+<div align = 'center'>
+    Fig15
+</div>
+
+
+
+C/C++—>All Options—>SDL checks change to "No"，as shown in the figure 
+
+<div align = 'center'>
+
+![img](ImageFolder/fig16.png)
+
+</div>
+
+<div align = 'center'>
+    Fig16
+</div>
+
+
+
+   So far, the PCL library configuration is completed.
+
+ 
+
+#### Run demo program
+
+ 
+
+1. Compiling SDK
+
+   Open SDK project with Qt, click to compile and generate library files , as shown in the figure
+
+ <div align = 'center'>
+
+
+
+![img](ImageFolder/fig17.png)
+
+ </div>
+
+<div align = 'center'>
+    Fig17
+</div>
+
+
+
+2.  Build project for Demo
+
+​      Demo located in Examples , open the demo of “Disparity2DepthDemo” , for instance.  Modify the    CMakeLists file reference to actual installation path , otherwise an error will be reported.
+
+ <div align = 'center'>
+
+
+
+![img](ImageFolder/fig18.png)
+
+ </div>
+
+<div align = 'center'>
+    Fig18
+</div>
+
+
+
+
+
+Open Cmake-gui and add path，as shown in the figure
+
+ <div align = 'center'>  
+
+![img](ImageFolder/fig19.png)
+
+</div>
+
+<div align = 'center'>
+    Fig19
+</div>
+
+
+
+
+
+​    click Configure button ，set configuration parameter, as shown in the figure
+
+ <div align = 'center'>
+
+![img](ImageFolder/fig20.png)
+
+ </div>
+
+<div align = 'center'>
+    Fig20
+</div>
+
+
+
+
+
+click finish button to start build,  if showed "Configuring done",  then click generate button to generate VS project files.
+
+3.  Compile and run
+
+​      Open the project with Visual Studio 2017,  click to compiling, also copy the dll in SmarterEye-SDK-  master\Runtime\Bin to debug directory or Release directory, this can run demo program.
+
+ 
+
+ 
+
+### Ubuntu 18.04 LTS (64 bit)
+
+ 
+
+#### Open virtual machine,  or directly enter Ubuntu
+
+#### Install g++，make application, etc. Execute  sudo apt-get install g++, sudo apt-get install make
+
+#### Install Qt5.12
+
+1. Download qt-opensource-linux-x64-5.12.2.run
+
+2. Open the terminal and execute ./qt-opensource-linux-x64-5.12.2.run, then click to install
+
+#### Install cmake3.20
+
+1. Download cmake-3.20.2.tar.gz，open terminal and execute tar -zxvf cmake-3.20.2.tar.gz to unzip file
+
+2. Enter the file directory，execute ./bootstrap
+
+   **Note: If error at：Could Not found OpenSSL, execute sudo apt-get install libssl-dev to solve the problem of lack of library**
+
+3. Execute make -j
+
+4. Execute sudo make install
+
+5. Execute cmake --version to verify that the installed version was successful，as shown in the figure
+
+   <div align = 'center'>
+
+   
+
+![img](ImageFolder/fig21.png)
+
+</div>
+
+<div align = 'center'>
+    Fig21
+</div>
+
+
+
+which indicates that the installation was successful.
+
+ 
+
+#### Install OpenCV
+
+ 
+
+1. Download and unzip opencv-3.4.1.tar.gz
+
+2. Enter the file directory，open terminal and execute sudo apt-get install build-essential pkg-config libgtk2.0-dev libavcodec-dev libavformat-dev libjpeg-dev libswscale-dev libtiff5-dev , etc. to install dependence package
+
+3. Execute cd build, cmake .., as shown in the figure ，which indicates that build is successful
+
+ <div align = 'center'>
+
+
+
+![img](ImageFolder/fig22.png)
+
+ </div>
+
+<div align = 'center'>
+    Fig22
+</div>
+
+
+
+4. make，compile too long
+
+5. Execute sudo make install
+
+ 
+
+#### Install PCL(Point Cloud Library)
+
+1. Doanload and unzip pcl-pcl-1.9.0.tar.gz
+
+2. Enter the file directory，Execute mkdir build，also execute cd build to enter build directory
+
+3. Install dependecnde package by execute
+
+​          sudo apt-get update
+
+​          sudo apt-get install build-essential linux-libc-dev
+
+​          sudo apt-get install libusb-1.0-0-dev libusb-dev libudev-dev
+
+​          sudo apt-get install mpi-default-dev openmpi-bin openmpi-common
+
+​          sudo apt-get install libflann1.8 libflann-dev
+
+​          sudo apt-get install libeigen3-dev
+
+​    **Note: if need PCLVisualizer，install OpenNI、OpenNI2.**
+
+4. cmake ..
+
+5. make -j
+
+6. sudo make install
+
+#### Ubuntu install of ROS Melodic
+
+1. Setup sources.list
+
+
+   ```
+   sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+   ```
+
+
+2. Setup keys
+
+   ```
+   sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+   ```
+
+3. Install 
+
+   ```
+   sudo apt update
+   sudo apt install ros-melodic-desktop-full
+   ```
+
+4. Dependencies for building packages
+
+   ```
+   sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+   ```
+
+5. Initialize rosdep
+
+   ```
+   sudo rosdep init
+   rosdep update
+   ```
+   
+
+**Note:  **
+
+**Due to many factors such as the network environment or the interception of overseas servers, the following problems may occur during initialization**
+
+**(1) it showed "rosdep" command can't be found when execute "sudo rosdep init ", firstly it is recommended to replace the network. If it cannot be solved, execute "sudo gedit /etc/hosts " to open the document , add "151.101.84.133 raw.githubusercontent.com" to last line , thus add corresponding host ip for github, then re-execute command after shutup and save.**
+
+**(2) it showed "time-out" when execute "rosdep update", this should change "DOWNLOAD_TIMEOUT = 500 (or higher)"of  three files under/usr/lib/python2.7/dist-packages/rosdep2 directory, operate as following****
+
+```
+   sudo vim /usr/lib/python2.7/dist-packages/rosdep2/gbpdistro_support.py
+   
+   sudo vim /usr/lib/python2.7/dist-packages/rosdep2/sources_list.py
+   
+   sudo vim /usr/lib/python2.7/dist-packages/rosdep2/rep3.py
+```
+
+**In the actual installation process , other problems may occur. Please treat them specifically.**
+
+when finished, it is shown in the figure
+
+<div align = 'center'>
+   
+
+
+![img](ImageFolder/fig23.png)
+
+</div>
+
+
+
+<div align = 'center'>
+       Fig23
+   </div>
+   
+
+6. Execute "roscore" install succeed if show as figure
+
+   <div align = 'center'>
+
+   
+
+     ![img](ImageFolder/fig24.png)
+
+   </div>
+
+   
+
+   
+
+   <div align = 'center'>
+       Fig24
+   </div>
+
+   
+7. Environment setup
+
+   ```
+   echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+   source ~/.bashrc
+   ```
+
+#### Use ROS Wrapper
+
+1. The directory structure is as follows
+
+   ```
+   <sdk>/wrapper
+      └── ros
+          └── src
+              └── zkhy_stereo_d
+                  ├── CMakeLists.txt
+                  ├── launch
+                  │   ├── display.launch
+                  │   └── zkhy_stereo.launch
+                  ├── package.xml
+                  ├── rviz
+                  │   └── zkhy_stereo.rviz
+                  ├── src
+                  │   ├── framemonitor.cpp
+                  │   ├── framemonitor.h
+                  │   ├── stereo_listener.cpp
+                  │   ├── stereo_publisher.cpp
+                  │   └── stereo_publisher.h
+                  └── srv
+                      ├── CameraParams.srv
+                      └── RotationMatrix.srv
+   ```
+
+2. Compiling SDK
+
+   Enter SDK directory，newly create "build", execute "cmake ..","make" to create sdk modules, which located in _output directory.
+
+3. Compile command as follwing
+
+   ```
+    cd <sdk>/wrapper/ros/
+    catkin_make
+    source devel/setup.bash
+   ```
+
+4. Compile succeed, run wrapper program by executing "roslaunch zkhy_stereo_d zkhy_stereo.launch"
+
+5. After running wrapper program, it would create following topic and service
+
+   ```
+    rostopic list
+      
+      /zkhy_stereo/disparity      # depth image data
+          
+      /zkhy_stereo/left/color     # Left camera color
+      /zkhy_stereo/left/gray      # Left camera gray
+      
+      /zkhy_stereo/right/color    # Right camera color
+      /zkhy_stereo/right/gray     # Right camera gray
+      
+      /zkhy_stereo/imu            # IMU data
+      /zkhy_stereo/points			# PointCloud2 data
+      
+    rosservice list
+      
+      /zkhy_stereo/get_camera_params      # get camera parameter
+      /zkhy_stereo/get_rotation_matrix    # get rotation matrix
+   ```
+
+
+
+#### Run demo program 
+
+1. Compiling SDK
+
+   Enter SDK directory，compiling SDK with Qt Creator，generate library files，which located in newly genarated Runtime/bin 
+
+   **Note:  If error at :“cannot find -lGL“ with Qt Compile，then execute ln -s /usr/lib/x86_64-linux-gnu/libGL.so.1 /usr/lib/libGL.so to create link to /usr/lib for existed library file, and resatrt Qt**
+
+2. Compiling demo
+
+   Enter Examples，enter demo program, open terminal
+
+   mkdir build, cd build
+
+   cmake ..
+
+   make
+
+   the generated executable located in Runtime/bin, as shown in the figure 
+
+ <div align = 'center'>
+
+
+
+![img](ImageFolder/fig25.png)
+
+ </div>
+
+<div align = 'center'>
+    Fig25
+</div>
+
+
+
+3. Execute ./Disparity2DepthDemo and run the demo.
+
+
+
+### Ubuntu 20.04 LTS (64 bit)
+
+#### Open virtual machine,  or directly enter Ubuntu
+
+#### Install cmake 3.20
+
+1. Download cmake-3.20.2.tar.gz，open terminal and execute tar -zxvf cmake-3.20.2.tar.gz to unzip file
+
+2. Enter the file directory，execute "./bootstrap"
+
+3. Execute "make -j"
+
+4. Execute "sudo make install"
+
+5. Execute "cmake --version" to verify that the installed version was successful，as shown in the figure
+
+   <div align = 'center'>
+
+   ![img](ImageFolder/fig26.png)
+
+   </div>
+
+   <div align = 'center'>
+       Fig26
+   </div>
+
+#### Install Qt 5.12
+
+1. Download qt-opensource-linux-x64-5.12.2.run
+
+2. Open the terminal and execute ./qt-opensource-linux-x64-5.12.2.run, then click to install
+
+   **Note：**
+
+   ​     Install Default installation path /opt
+
+3. Setting environment variables, execute "sudo gedit ~/.bashrc", open the document and add the following four lines
+
+   ```
+   export QTDIR=/opt/Qt5.12.2/5.12.2/gcc_64
+   export PATH=$QTDIR/bin:$PATH
+   export LD_PLUGINS_PATH=$QTDIR/plugins:$LD_PLUGINS_PATH
+   export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
+   ```
+
+#### Install OpenCV 4.5.1
+
+1. Download and unzip opencv-4.5.1.tar.gz
+
+2. Enter the file directory，open terminal and install dependence package, execute
+
+   ```
+   sudo apt-get install build-essential pkg-config libgtk2.0-dev libavcodec-dev libavformat-dev libjpeg-dev libswscale-dev libtiff5-dev
+   ```
+
+3. Execute "mkdir build", "cd build", "cmake ..", as shown in the figure, which indicates that build is successful
+
+   <div align = 'center'>
+
+   ![img](ImageFolder/fig27.png)
+
+   </div>
+
+<div align = 'center'>
+    Fig27
+</div>
+
+4. Execute "make -j"
+
+5. Execute"sudo make install"
+
+    **Note:**
+
+   ​     Default install path /usr/local
+
+#### Install PCL 1.12.0
+
+1. Download and install VTK-7.1.1
+
+2. Download and install libpcap-1.10.1
+
+3. Download and install merslib-0.5.3
+
+4. Install other dependences 
+
+   ```
+   sudo apt-get update
+   sudo apt-get install build-essential linux-libc-dev
+   sudo apt-get install libusb-1.0-0-dev libusb-dev libudev-dev
+   sudo apt-get install mpi-default-dev openmpi-bin openmpi-common
+   sudo apt-get install libflann1.9 libflann-dev
+   sudo apt-get install libeigen3-dev
+   sudo apt-get install libboost-all-dev
+   sudo apt-get install libqhull* libgtest-dev  
+   sudo apt-get install freeglut3-dev pkg-config  
+   sudo apt-get install libxmu-dev libxi-dev   
+   sudo apt-get install mono-complete   
+   sudo apt-get install libopenni-dev   
+   sudo apt-get install libopenni2-dev
+   ```
+
+5. Install PCL 1.12.0
+
+    （1）Download and unzip pcl-pcl-1.12.0.tar.gz
+
+    （2）Enter the directory and execute"mkdir build","cd build", open terminal
+
+    （3）Execute”cmake ..“
+
+    （4）Execute”make“
+
+   ​           **Note:** 
+
+   ​    The intermediate compilation file is large, the remaining space of virtual machine disk should be not less than 15G, and the ram is preferably no less than 4G. At the same time, single core compilation must be used, otherwise there may be errors as shown in the figure below.
+
+   <div align = 'center'>
+
+   ​                  ![img](ImageFolder/fig28.png)
+
+   </div>   
+
+   <div align = 'center'>
+       Fig 28
+   </div>
+
+   
+
+   （5）Execute ”sudo make install“
+
+   ​           **Note:**
+
+   ​                   Default install path /usr/local
+
+#### Install ROS Noetic
+
+1. Setup source.list
+
+   ```
+   sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+   ```
+
+2. Setup keys
+
+   ```
+   sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+   ```
+
+3. Install
+
+   ```
+   sudo apt update
+   sudo apt install ros-melodic-desktop-full
+   ```
+
+   **Note:**
+
+   ​        The following errors may occur during installation
+
+   <div align = 'center'>
+
+   ![img](ImageFolder/fig29.png)
+
+   </div>
+
+   <div align = 'center'>
+       Fig29
+   </div>
+
+   
+
+   ​     Right click to choose "settings"->"About"->"Software Update", setting as following
+
+   <div align = 'center'>
+
+   ![img](ImageFolder/fig30.png)</div>
+
+   <div align = 'center'>
+       Fig30
+   </div>
+
+   
+4. Dependencies for building packages
+
+   ```
+   sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+   ```
+
+5. Initialize rosdep
+
+   ```
+   sudo rosdep init
+   rosdep update
+   ```
+
+​     **Note:**
+
+​     （1）When an error occurs, you can change the network environment, such as connecting to a mobile hotspot, and try it many time.
+
+​     （2）Execute "sudo gedit /etc/hosts", open the document and add following 5 lines
+
+```
+151.101.84.133 raw.githubusercontent.com
+185.199.109.133 raw.githubusercontent.com
+185.199.108.133 raw.githubusercontent.com
+185.199.111.133 raw.githubusercontent.com
+185.199.110.133 raw.githubusercontent.com
+```
+
+6. Setting environment variables
+
+   ```
+   echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+   source ~/.bashrc
+   ```
+
+7. Execute "roscore",  install succeed if show as figure
+
+   <div align = 'center'>
+
+   ![img](ImageFolder/fig31.png)
+
+   </div>
+
+   <div align = 'center'>
+       Fig31
+   </div>
+
+   
+
+
+
+
 
 ## example description
+
 ### StereoCameraDemo
 `StereoCameraDemo` covers multiple functions such as parameter request, rotation matrix request, firmware upgrade, acquisition of 3D point cloud data, etc. It is suitable for secondary development with extensive functional requirements. However, due to the complex functions, there are many things to be implemented in `mycamerahandler.cpp`.
 

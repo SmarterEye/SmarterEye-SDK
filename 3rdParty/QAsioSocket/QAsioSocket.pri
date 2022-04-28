@@ -20,11 +20,15 @@ HEADERS += \
     $$PWD/src/qsocketconnection.h \
 #    $$PWD/include/qasiosslsocket.h \
 #    $$PWD/include/qasiosslserver.h \
-    $$PWD/include/qasiosocket.h
+    $$PWD/include/qasiosocket.h  \
+    $$PWD/include/qasioudpsocket.h \
+    $$PWD/src/qudpsocketconnection.h
 
 SOURCES += \
     $$PWD/src/qasiotcpsocket.cpp \
     $$PWD/src/qasiotcpserver.cpp \
-    $$PWD/src/qsocketconnection.cpp
+    $$PWD/src/qsocketconnection.cpp \
 #    $$PWD/src/qasiosslsocket.cpp \
- #    $$PWD/src/qasiosslserver.cpp
+ #    $$PWD/src/qasiosslserver.cpp \
+    $$PWD/src/qasioudpsocket.cpp \
+    $$PWD/src/qudpsocketconnection.cpp

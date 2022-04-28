@@ -20,7 +20,7 @@ if (WIN32)
     endif()
 else()
   # set stuff for other systems
-    add_definitions(-std=c++11)
+    add_definitions(-std=c++14)
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")

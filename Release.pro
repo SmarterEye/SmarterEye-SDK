@@ -8,7 +8,8 @@ SUBDIRS  += MessageBus \
             3rdParty/QAsioSocket \
             Satp \
             SatpExt \
-            ImageUtils
+            ImageUtils \
+            SeUdpClient
 
 !arm-xilinx-linux-gnueabi-g++{
     SUBDIRS  += StereoCamera \
