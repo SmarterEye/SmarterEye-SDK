@@ -116,6 +116,8 @@ int main(int argc, char *argv[])
         default:
             break;
         }
+
+        std::cout << "please input (f r u l s z) : " << std::endl;
         c = getchar();
     }
 }

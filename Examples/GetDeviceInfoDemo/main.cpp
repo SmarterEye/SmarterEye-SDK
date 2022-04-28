@@ -6,6 +6,7 @@
 #include "stereocamera.h"
 #include "protocol.h"
 #include "deviceinfo.h"
+#include "sedevicestate.h"
 
 #ifdef _WINDOWS
 #include <direct.h>
@@ -116,6 +117,8 @@ int main(int argc, char *argv[])
     sdkVersion = path + sdkVersion;
     externSdkVersion = readTxt(sdkVersion);
 #endif
+    SEDeviceState seDeviceState;
+    seDeviceState = camera->getDeviceState();
     DeviceInfo deviceInfo;
     camera->requestDeviceInfo(deviceInfo);
     dumpDeviceInfo(deviceInfo, externSdkVersion);
@@ -124,12 +127,19 @@ int main(int argc, char *argv[])
     {
         camera->requestDeviceInfo(deviceInfo);
         cout << "cpu temperature    " << deviceInfo.CPUTemperature << endl;
-        std::this_thread::sleep_for(std::chrono::seconds(2));
-    }
+        if(seDeviceState.deviceHighTemperature()){
+            cout << " high temperature" << endl;
+        }
 
-    int c = 0;
-    while (c!= 'x')
-    {
-        c = getchar();
+        switch(seDeviceState.currentState())
+        {
+          case SEDeviceState::NormalState:
+            cout << "device state : " << "normal state" <<endl;
+            break;
+          case SEDeviceState::AbnormalState:
+            cout << "device state : " << "abnormal state" <<endl;
+            break;
+        }
+        std::this_thread::sleep_for(std::chrono::seconds(2));
     }
 }

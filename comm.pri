@@ -3,8 +3,8 @@ include(modules.pri)
 CONFIG += c++11
 
 SDKPATH =  $$PWD
-INCLUDEPATH +=  $$PWD/inc $$OPENSEPATH/inc
-
+INCLUDEPATH +=  $$PWD/inc $$OPENSEPATH/inc $$PWD/3rdParty/QAsioSocket/include
+ 
 message("sdk comm $$DESTDIR")
 
 win32 | android {

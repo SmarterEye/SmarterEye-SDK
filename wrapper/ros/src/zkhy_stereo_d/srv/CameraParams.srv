@@ -1,0 +1,10 @@
+---
+float64 focus
+float64 cx
+float64 cy
+float64 RRoll
+float64 RPitch
+float64 RYaw
+float64 Tx
+float64 Ty
+float64 Tz

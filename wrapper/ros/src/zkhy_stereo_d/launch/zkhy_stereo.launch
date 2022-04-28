@@ -1,0 +1,11 @@
+<launch>
+
+<node pkg="zkhy_stereo_d" name="stereo_publisher" type="stereo_publisher">
+
+</node>
+
+<node pkg="zkhy_stereo_d" name="stereo_listener" type="stereo_listener">
+
+</node>
+
+</launch>
