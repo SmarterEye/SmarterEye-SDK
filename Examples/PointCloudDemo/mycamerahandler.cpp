@@ -119,7 +119,7 @@ void MyCameraHandler::handleDisparityByLookupTable(unsigned char *image, int wid
             y = y_distance_buffer_[i];
             z = z_distance_buffer_[i];
 
-            if (x == 1000000.0f || y == 1000000.0f){
+            if ((fabs(x) > 200000.0f)||(fabs(y) > 200000.0f)||(fabs(z) > 200000.0f)){
                 //std::cout << "PointXYZ is null" << std::endl;
                 continue;
             }
