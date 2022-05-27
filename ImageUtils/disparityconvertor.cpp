@@ -349,6 +349,7 @@ int DisparityConvertor::getDisparityBitNum(int format)
     int bitNum = 0;
     switch (format) {
     case FrameFormat::Disparity16:
+    case FrameFormat::DisparityDens16:
         bitNum = 5;
         break;
     default:

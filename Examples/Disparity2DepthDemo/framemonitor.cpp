@@ -83,6 +83,7 @@ void FrameMonitor::loadFrameData2Mat(const RawImageFrame *frameData, cv::Mat &ds
 
     switch (frameData->format) {
     case FrameFormat::Disparity16:
+    case FrameFormat::DisparityDens16:
     {
 //        DisparityConvertor::convertDisparity2FloatFormat(imageData, width, height, 5, mDisparityFloatData.get());
 //        DisparityConvertor::convertDisparity2RGB(mDisparityFloatData.get(), width, height, 0, 45, mRgbBuffer.get());
