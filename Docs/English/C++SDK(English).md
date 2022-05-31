@@ -4,24 +4,10 @@
 # Version update record
 Online date | Version number | Update content
 :-: | :-: | :-:
-2019.02.23 | 2.8 | The first version of the document, the revision number is unified with the corresponding SdkVer
-2019.03.01 | 2.9 | Obstacle structure changes
-2019.03.22 | 2.11 | Added Demo, fixed bugs, and added 4 interface descriptions
-2019.04.29 | 2.14 | Modify Demo, use CMake, fix bugs
-2019.05.05 | 0.2.15 | Added connection status acquisition interface
-2019.07.05 | 0.2.17 | Added the return value description of the upgrade interface
-2019.09.07 | 0.2.18 | Added frame rate setting, access interface and description
-2019.09.20 | 0.2.19 | Added header file frameext.h, adjusted GetCompoundDemo and GetLaneExtDemo
-2019.10.18 | 0.2.20 | Network library replacement
-2019.11.28 | 0.2.21 | 1. Add the interface and description for cross-thread execution function, and add DisplayFramesDemo and description; 2. Add the interface description for yuv to rgb
-2019.12.26 | 0.2.22 | Added interface for obtaining ambient light brightness
-2019.12.31 | 0.2.23 | Bug fixes
-2020.02.10 | 0.2.25 | Added PointCloudDemo, GetMotionDataDemo and related interfaces, adjusted DisplayFramesDemo
-2020.03.23 | 0.2.26 | Fix bugs: GetMotionDataDemo, PointCloudDemo, optimize lane line drawing
-2022.02.15 | 0.2.33 | Added GetDeviceInfoDemo and description;
-2022.03.15 | 0.2.34 | Add compiling and running environment configuration method 
-2022.04.06 | 0.2.35 | Add ROS environment configuration under Ubuntu 18.04 LTS and method of using ROS wrapper package 
-2022.04.11 | 0.2.36 | Add Ubuntu 20.04 LTS configuration 
+2022.02.15 | v0.4.0 | Initial version, OPEN SOURCE 
+2022.04.28 | v0.5.1 | Add new UDP,  GetPerceptionDemo,  ImageStorageDemo, merge ros wrapper, adaptation Ubuntu 20.04 LTS, update sdk document 
+2022.05.27 | v0.5.2 | compatible with S3 device, fix 3d data errors,  add new FAQ 
+             |                |                                                              
 
 # Introduction
 
@@ -1385,19 +1371,24 @@ when finished, it is shown in the figure
       
       /zkhy_stereo/get_camera_params      # get camera parameter
       /zkhy_stereo/get_rotation_matrix    # get rotation matrix
+      /zkhy_stereo/get_frame_rate         # get_frame_rate
    ```
 
 
 
 #### Run demo program 
 
-1. Compiling SDK
+1. Direct compilation
+
+   Under Ubuntu, execute build.sh in the scripts to compile. The compiled SDK module and demo program are automatically stored in `/SdkRelease_vX.X.X/Runtime/Bin`. Add the path of the library file to the environment variable,  eg :
+
+   export LD_LIBRARY_PATH=/root/adas/SdkRelease_vX.X.X/Runtime/Bin`.
+
+2. Indirect compilation
 
    Enter SDK directory，compiling SDK with Qt Creator，generate library files，which located in newly genarated Runtime/bin 
 
    **Note:  If error at :“cannot find -lGL“ with Qt Compile，then execute ln -s /usr/lib/x86_64-linux-gnu/libGL.so.1 /usr/lib/libGL.so to create link to /usr/lib for existed library file, and resatrt Qt**
-
-2. Compiling demo
 
    Enter Examples，enter demo program, open terminal
 
@@ -1423,7 +1414,7 @@ when finished, it is shown in the figure
 
 
 
-3. Execute ./Disparity2DepthDemo and run the demo.
+3. Execute and run the demo as  ./Disparity2DepthDemo.
 
 
 

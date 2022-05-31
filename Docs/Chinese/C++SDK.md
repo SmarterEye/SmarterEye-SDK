@@ -4,24 +4,9 @@
 # 版本更新记录
 上线日期 | 版本号 | 更新内容
 :-: | :-: | :-: 
-2019.02.23 | 2.8 | 文档初版，修订版本号与对应SdkVer统一
-2019.03.01 | 2.9 | 障碍物结构体变化
-2019.03.22 | 2.11 | 增加Demo，修复bug，增加4个接口的说明
-2019.04.29 | 2.14 | 修改Demo，使用CMake，修复bug
-2019.05.05 | 0.2.15 | 增加连接状态获取接口 
-2019.07.05 | 0.2.17 | 增加升级接口返回值说明 
-2019.09.07 | 0.2.18 | 增加帧率设置、获取接口及说明
-2019.09.20 | 0.2.19 | 增加头文件frameext.h，调整GetCompoundDemo与GetLaneExtDemo
-2019.10.18 | 0.2.20 | 网络库替换
-2019.11.28 | 0.2.21 | 1. 增加用于跨线程执行函数的接口及说明，增加DisplayFramesDemo及说明； 2. 增加对yuv转rgb的接口说明
-2019.12.26 | 0.2.22 | 增加接口用于获取环境光亮度
-2019.12.31 | 0.2.23 | 修复bug
-2020.02.10   | 0.2.25 | 增加PointCloudDemo、GetMotionDataDemo及相关接口，调整DisplayFramesDemo
-2020.03.23   | 0.2.26 | 修复bug:GetMotionDataDemo、PointCloudDemo，优化车道线绘制
-2022.02.15   | 0.2.33 | 增加GetDeviceInfoDemo及说明；
-2022.03.15 | 0.2.34 | 增加编译和运行环境配置方法 
-2022.04.06 | 0.2.35 | 增加Ubuntu 18.04 下ROS环境配置方法及wrapper程序包使用说明 
-2022.04.11 | 0.2.36 | 增加Ubuntu 20.04 运行配置说明 
+2022.02.15 | v0.4.0 | 初版，sdk开源 
+2022.04.28 | v0.5.1 | 增加UDP通讯库，GetPerceptionDemo，ImageStorageDemo，合并Ros wrapper，新增framerateset service，适配ubuntu20.04，更新sdk文档 
+2022.05.27 | v0.5.2 | 兼容S3设备，修复视差转3D数据异常问题 
 
 
 
@@ -1273,13 +1258,15 @@ vtkzlib-8.1.lib
 
 #### 运行demo程序 
 
-1. 编译SDK
+1. 直接编译
+
+   在Ubuntu下，执行scripts路径下的build.sh脚本进行编译，<sdk>下生成SdkRelease_v0.x.x 及其压缩文件SdkRelease_v0.x.x.tar.gz, SdkRelease_v0.x.x/Runtime/Bin文件夹包含生成的sdk库和demo可执行程序; 将库文件的路径添加到环境变量中，如：`export LD_LIBRARY_PATH=/root/adas/SdkRelease_vX.X.X/Runtime/Bin`
+
+2. 间接编译
 
    打开sdk库文件夹，使用Qt Creator编译sdk库，生成库文件，位于Runtime/bin下
 
    **注：如果Qt编译出现“cannot find -lGL“，则执行ln -s /usr/lib/x86_64-linux-gnu/libGL.so.1 /usr/lib/libGL.so命令给已存在的库文件创建一个链接到/usr/lib目录，重启Qt**
-
-2. 编译 demo
 
    打开Examples，进入demo程序,如：Disparity2DepthDemo
 
@@ -1302,7 +1289,7 @@ vtkzlib-8.1.lib
 </div>
 
 
-3.  在当前文件夹下，执行./Disparity2DepthDemo即可执行程序。
+3.  在当前文件夹下，打开终端执行即可运行程序，如./Disparity2DepthDemo。
 
 
 
@@ -1364,6 +1351,7 @@ vtkzlib-8.1.lib
        
        /zkhy_stereo/get_camera_params      # 获取相机参数
        /zkhy_stereo/get_rotation_matrix    # 获取旋转矩阵数据
+       /zkhy_stereo/get_frame_rate         # 获取相机帧率
 
 
 
