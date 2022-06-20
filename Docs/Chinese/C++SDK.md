@@ -7,6 +7,7 @@
 2022.02.15 | v0.4.0 | 初版，sdk开源 
 2022.04.28 | v0.5.1 | 增加UDP通讯库，GetPerceptionDemo，ImageStorageDemo，合并Ros wrapper，新增framerateset service，适配ubuntu20.04，更新sdk文档 
 2022.05.27 | v0.5.2 | 兼容S3设备，修复视差转3D数据异常问题 
+2022.06.14 | v0.5.3 | 增加GetObstacleDemo 
 
 
 
