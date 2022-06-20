@@ -7,7 +7,7 @@ Online date | Version number | Update content
 2022.02.15 | v0.4.0 | Initial version, OPEN SOURCE 
 2022.04.28 | v0.5.1 | Add new UDP,  GetPerceptionDemo,  ImageStorageDemo, merge ros wrapper, adaptation Ubuntu 20.04 LTS, update sdk document 
 2022.05.27 | v0.5.2 | compatible with S3 device, fix 3d data errors,  add new FAQ 
-             |                |                                                              
+ 2022.06.14 | v0.5.3 | Add GetObstacleDemo 
 
 # Introduction
 
