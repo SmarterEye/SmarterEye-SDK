@@ -251,3 +251,8 @@ bool StereoCamera::requestDeviceInfo(DeviceInfo &deviceInfo)
 {
     return mImpl->requestDeviceInfo(deviceInfo);
 }
+
+bool StereoCamera::sendSetTimeMessage()
+{
+    return mImpl->sendSetTimeMessage();
+}

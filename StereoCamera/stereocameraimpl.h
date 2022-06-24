@@ -68,6 +68,7 @@ public:
     void enableMotionData(bool enable);
     const SEDeviceState &getDeviceState();
     bool requestDeviceInfo(DeviceInfo &deviceInfo);
+    bool sendSetTimeMessage();
 
     //override BlockHandler
     bool handleReceiveBlock(quint32 dataType, const char *block, int size) override;

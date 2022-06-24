@@ -56,7 +56,7 @@ public:
     void enableMotionData(bool enable);
     const SEDeviceState &getDeviceState();
     bool requestDeviceInfo(DeviceInfo &deviceInfo);
-
+    bool sendSetTimeMessage();
 protected:
     StereoCamera();
     inline StereoCameraImpl *getImpl(){return mImpl;}

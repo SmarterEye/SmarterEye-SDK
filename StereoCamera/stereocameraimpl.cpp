@@ -25,6 +25,8 @@ using namespace std;
 #include "QThreadPool"
 #include "filesender.h"
 #include "deviceinfo.h"
+#include <QDateTime>
+
 
 #ifdef Q_OS_LINUX
 static const QString kAdasDownloadPath(QString(getenv("HOME")) + "/ADAS_Files/");
@@ -541,4 +543,19 @@ bool StereoCameraImpl::requestDeviceInfo(DeviceInfo &deviceInfo)
     deviceInfo.InitialSetupStatus = list[9].toStdString() == "0" ? "uninstalled" : "installed";
     deviceInfo.CPUTemperature =list[10].toStdString();
     return true;
+}
+
+bool StereoCameraImpl::sendSetTimeMessage()
+{
+    if (isConnected())
+    {
+        MessageSetTime setTime;
+        setTime.value = QDateTime::currentDateTime().currentMSecsSinceEpoch();
+        sendMessage(MessageType::SetTime, setTime);
+        return true;
     }
+    else
+    {
+        return false;
+    }
+}

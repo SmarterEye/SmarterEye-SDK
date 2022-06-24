@@ -8,6 +8,9 @@ Online date | Version number | Update content
 2022.04.28 | v0.5.1 | Add new UDP,  GetPerceptionDemo,  ImageStorageDemo, merge ros wrapper, adaptation Ubuntu 20.04 LTS, update sdk document 
 2022.05.27 | v0.5.2 | compatible with S3 device, fix 3d data errors,  add new FAQ 
  2022.06.14 | v0.5.3 | Add GetObstacleDemo 
+ 2022.06.20 | v0.5.4 | Add Disparity2PointCloud 
+ 2022.06.22 | v0.5.5 | Add png format convertor for Disparity2PointCloud 
+ 2022.06.23 | v0.5.6 | Add time service of device interface 
 
 # Introduction
 
@@ -2643,6 +2646,51 @@ c = getchar();
 }
 ````
 
+### Disparity2PointCloud—— Disparity data convert to point clout data(Offline)
+
+The point cloud data obtained locally can be converted to point cloud data, and pcd format is saved locally, also dat or png format data are supported. Started the  program, input the path where the diaparity data files are located according to the propmt, and press Enter key. The directory <dads_params> where the camera device configuration file is located must be included in the direcotry of the first layer of the path. The reading of png format data file depends on OpenCV, and the saving of point cloud data depends on PCL.
+
+    #include <iostream>
+    #include "convertormanage.h"
+    #include <QCoreApplication>
+    #include "disparityframeconvertor.h"
+    #include "pcviewer.h"
+    
+    int main(int argc, char *argv[])
+    {
+        QCoreApplication a(argc, argv);
+        std::cout << "Input the path of your local image data: " << std::endl;
+        std::string disparityPath;
+        std::cin >> disparityPath;
+        QString inputPath = QString::fromLocal8Bit(disparityPath.c_str());
+        QString selectedPath = inputPath.replace("\\","/");
+        DisparityFrameConvertor * disparityFrameConvertor = new DisparityFrameConvertor;
+        ConvertorManage *mConvertorManager = new ConvertorManage(selectedPath,disparityFrameConvertor);
+        if(!mConvertorManager->requestStereoCameraParams())
+        {
+           printf("Requset stereo camera calibration parameters failed!\n");
+           while(1);
+        }
+        printf("Start convert...\n");
+        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        mConvertorManager->start();
+        std::shared_ptr<PCViewer> viewer(new PCViewer(true));
+        while(!viewer->wasStopped())
+        {
+            if(!mConvertorManager->isRunning() && disparityFrameConvertor->GetQueueSize() == 0)
+            {
+                printf("All saved!\n");
+                break;
+            }
+    
+            auto cloud = disparityFrameConvertor->getCloud();
+            viewer->save_dir_ = disparityFrameConvertor->GetCloudPath().toStdString();
+            viewer->update(cloud);
+        }
+        return a.exec();
+    }
+
+
 
 # Interface Description
 
@@ -2791,6 +2839,12 @@ parameter name | parameter type | description
 :-: | :-: | :-:
 enable | bool | yes/no get attitude data
 By modifying this flag bit, the acquisition of IMU data can be enabled/disabled.
+
+#### time service
+
+#### Function name: sendSetTimeMessage()
+
+Send the local system time to the device. The return value is bool type. Send succeed it will return true, sending will be failed  when Internet is not connected.
 
 ### SATP class
 function name | return value type | role
