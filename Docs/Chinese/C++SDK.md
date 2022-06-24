@@ -8,6 +8,9 @@
 2022.04.28 | v0.5.1 | 增加UDP通讯库，GetPerceptionDemo，ImageStorageDemo，合并Ros wrapper，新增framerateset service，适配ubuntu20.04，更新sdk文档 
 2022.05.27 | v0.5.2 | 兼容S3设备，修复视差转3D数据异常问题 
 2022.06.14 | v0.5.3 | 增加GetObstacleDemo 
+2022.06.20 | v0.5.4 | 增加Disparity2PointCloud 
+2022.06.22 | v0.5.5 | Disparity2PointCloud增加png格式视差数据文件转换 
+2033.06.23 | v0.5.6 | 增加设备授时接口 
 
 
 
@@ -2578,6 +2581,51 @@ int main(int argc, char *argv[])
 }
 ```
 
+### Disparity2PointCloud——视差数据转换成点云数据（离线）
+
+支持从本地获取视差数据转换成点云数据，并且以.pcd格式保存到本地，支持dat和png格式视差数据文件。启动程序，根据提示输入视差数据文件所在的路径，然后回车，并且路径第一层目录下必须包含相机设备配置文件所在的目录<adas_params>。png格式数据文件读取依赖OpenCV，点云数据的保存依赖于PCL。
+
+    #include <iostream>
+    #include "convertormanage.h"
+    #include <QCoreApplication>
+    #include "disparityframeconvertor.h"
+    #include "pcviewer.h"
+    
+    int main(int argc, char *argv[])
+    {
+        QCoreApplication a(argc, argv);
+        std::cout << "Input the path of your local image data: " << std::endl;
+        std::string disparityPath;
+        std::cin >> disparityPath;
+        QString inputPath = QString::fromLocal8Bit(disparityPath.c_str());
+        QString selectedPath = inputPath.replace("\\","/");
+        DisparityFrameConvertor * disparityFrameConvertor = new DisparityFrameConvertor;
+        ConvertorManage *mConvertorManager = new ConvertorManage(selectedPath,disparityFrameConvertor);
+        if(!mConvertorManager->requestStereoCameraParams())
+        {
+           printf("Requset stereo camera calibration parameters failed!\n");
+           while(1);
+        }
+        printf("Start convert...\n");
+        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+        mConvertorManager->start();
+        std::shared_ptr<PCViewer> viewer(new PCViewer(true));
+        while(!viewer->wasStopped())
+        {
+            if(!mConvertorManager->isRunning() && disparityFrameConvertor->GetQueueSize() == 0)
+            {
+                printf("All saved!\n");
+                break;
+            }
+    
+            auto cloud = disparityFrameConvertor->getCloud();
+            viewer->save_dir_ = disparityFrameConvertor->GetCloudPath().toStdString();
+            viewer->update(cloud);
+        }
+        return a.exec();
+    }
+
+
 
 # 接口说明
 
@@ -2709,6 +2757,12 @@ value | int | 频率，单位Hz
 :-: | :-: | :-:
 enable | bool | 是/否 获取姿态数据
 通过修改该标志位，实现开启/关闭IMU数据的获取.
+
+#### 设备授时
+
+#### 函数名称：sendSetTimeMessage()
+
+给设备发送本地系统时间，返回值为 `bool` 类型，发送成功返回值为true。未连接状态下，发送会失败。
 
 ### SATP类
 函数名称 | 返回值类型 | 作用
