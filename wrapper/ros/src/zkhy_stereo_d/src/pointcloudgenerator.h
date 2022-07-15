@@ -10,7 +10,7 @@
 #include <condition_variable>
 
 #include <sensor_msgs/PointCloud2.h>
-#include "smarter_eye_sdk/calibrationparams.h"
+#include "calibrationparams.h"
 
 struct RawImageFrame;
 

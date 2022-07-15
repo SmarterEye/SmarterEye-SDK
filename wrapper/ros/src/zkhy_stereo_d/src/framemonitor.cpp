@@ -3,11 +3,12 @@
 #include <iostream>
 #include <opencv2/imgproc.hpp>
 
-#include "smarter_eye_sdk/satpext.h"
-#include "smarter_eye_sdk/frameid.h"
-#include "smarter_eye_sdk/frameformat.h"
-#include "smarter_eye_sdk/yuv2rgb.h"
-#include "smarter_eye_sdk/disparityconvertor.h"
+#include "satpext.h"
+#include "frameid.h"
+#include "frameformat.h"
+#include "yuv2rgb.h"
+#include "disparityconvertor.h"
+#include "frameext.h"
 
 FrameMonitor::FrameMonitor()
     : mFrameReadyFlag(false),
@@ -27,14 +28,10 @@ void FrameMonitor::handleRawFrame(const RawImageFrame *rawFrame)
     processFrame(rawFrame);
 }
 
-void FrameMonitor::handleMotionData(const MotionData *motionData)
-{
-    mMotionDataCallback(motionData);
-}
-
 void FrameMonitor::processFrame(const RawImageFrame *rawFrame)
 {
     int64_t timestamp = rawFrame->time;
+    size_t size = rawFrame->index;
     switch (rawFrame->frameId) {
     case FrameId::Disparity:
     {
@@ -62,6 +59,28 @@ void FrameMonitor::processFrame(const RawImageFrame *rawFrame)
         mFrameCallback(FrameId::CalibLeftCamera, timestamp, mLeftMat);
 
      //   std::cout << "update left mat" << std::endl;
+        char *extended = (char*)rawFrame + rawFrame->dataSize + sizeof(RawImageFrame);
+        const FrameDataExtHead *header = reinterpret_cast<const FrameDataExtHead *>(extended);
+        if (header->dataType == FrameDataExtHead::Compound)
+        {
+            header = reinterpret_cast<const FrameDataExtHead *>(header->data);
+            size -= sizeof (FrameDataExtHead);
+        }
+       do{
+            if(header->dataType == FrameDataExtHead::MotionData)
+            {
+                const MotionData *motionPtr = reinterpret_cast<const MotionData *>(header->data);
+                int totalNum = (header->dataSize - sizeof(FrameDataExtHead)) / sizeof(MotionData);
+                for(int index = 0; index < totalNum; index++)
+                {
+                    MotionData data(motionPtr[index].accelX,motionPtr[index].accelY,motionPtr[index].accelZ,
+                                    motionPtr[index].gyroX,motionPtr[index].gyroY,motionPtr[index].gyroZ,motionPtr[index].timestamp);
+                    mMotionDataCallback(&data);
+                }
+            }
+            header = reinterpret_cast<const FrameDataExtHead*>(reinterpret_cast<const char*>(header) + header->dataSize);
+        }while(reinterpret_cast<const char*>(header) < (extended + size));
+
         mFrameReadyFlag = true;
         mFrameReadyCond.notify_one();
     }
