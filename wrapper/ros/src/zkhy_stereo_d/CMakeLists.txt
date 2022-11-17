@@ -216,6 +216,7 @@ include_directories(
 
 # listener
 add_executable(stereo_listener src/stereo_listener.cpp)
+add_dependencies(stereo_listener zkhy_stereo_d_generate_messages)
 target_link_libraries(stereo_listener
         ${catkin_LIBRARIES}
         ${OpenCV_LIBS}
@@ -233,6 +234,7 @@ add_executable(stereo_publisher
         src/framemonitor.cpp
         src/pointcloudgenerator.cpp
         )
+add_dependencies(stereo_publisher zkhy_stereo_d_generate_messages)
 target_link_libraries(stereo_publisher
         ${catkin_LIBRARIES}
         ${SDK_LIBS}

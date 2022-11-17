@@ -4,8 +4,8 @@
 #include <sensor_msgs/PointCloud2.h>
 #include <sensor_msgs/point_cloud2_iterator.h>
 
-#include "smarter_eye_sdk/satpext.h"
-#include "smarter_eye_sdk/disparityconvertor.h"
+#include "satpext.h"
+#include "disparityconvertor.h"
 
 PointCloudGenerator::PointCloudGenerator()
     : width_(0),

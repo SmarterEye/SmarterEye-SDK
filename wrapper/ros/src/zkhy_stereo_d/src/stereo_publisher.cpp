@@ -5,10 +5,10 @@
 #include "stereo_publisher.h"
 
 #include "framemonitor.h"
-#include "smarter_eye_sdk/stereocamera.h"
-#include "smarter_eye_sdk/frameid.h"
-#include "smarter_eye_sdk/calibrationparams.h"
-#include "smarter_eye_sdk/rotationmatrix.h"
+#include "stereocamera.h"
+#include "frameid.h"
+#include "calibrationparams.h"
+#include "rotationmatrix.h"
 
 #include "cv_bridge/cv_bridge.h"
 #include "std_msgs/String.h"

@@ -10,7 +10,8 @@
 2022.06.14 | v0.5.3 | 增加GetObstacleDemo 
 2022.06.20 | v0.5.4 | 增加Disparity2PointCloud 
 2022.06.22 | v0.5.5 | Disparity2PointCloud增加png格式视差数据文件转换 
-2033.06.23 | v0.5.6 | 增加设备授时接口 
+2022.06.23 | v0.5.6 | 增加设备授时接口 
+2022.07.15 | v0.5.7 | 修复ros wrapper 无法获取imu数据问题 
 
 
 
@@ -81,25 +82,45 @@ struct FrameId
 3. SmartEye SDK目录结构
 
 ```bash
-Sdk-Release_linux-g++_v0.2.33
-├── Runtime
-│   └── Bin
-└── Src
-    └── SDK
-        ├── comm.pri
-        ├── Examples
-        │   ├── Disparity2Real3dDemo
-        │   ├── Disparity2RGBDemo
-        │   ├── DisplayFramesDemo
-        │   ├── GetCameraParamDemo
-        │   ├── GetCompoundDemo
-        │   ├── GetLaneExtDemo
-        │   ├── GetMotionDataDemo
-        │   ├── PointCloudDemo
-        │   │── StereoCameraDemo
-		│   └── GetDeviceInfoDemo
-        ├── inc
-        └── SatpExt 
+SmarterEye-SDK
+├── 3rdParty
+├── inc
+├── StereoCamera
+├── ImageUtils
+├── MessageBus
+├── RealtimeDatabase
+├── RtdbManager
+├── RtdbService
+├── Satp
+├── SatpExt
+├── SeUdpClient
+├── Examples
+│    ├── BenchmarkClient
+│    ├── BenchmarkServer
+│    ├── Disparity2DepthDemo
+│    ├── Disparity2PointCloud
+│    ├── Disparity2Real3dDemo
+│    ├── Disparity2RGBDemo
+│    ├── DisplayFramesDemo
+│    ├── GetCameraParamDemo
+│    ├── GetCompoundDemo
+│    ├── GetDeviceInfoDemo
+│    ├── GetLaneExtDemo
+│    ├── GetMotionDataDemo
+│    ├── GetObstacleDemo
+│    ├── GetPerceptionDemo
+│    ├── ImageStorageDemo
+│    ├── PointCloudDemo
+│    ├── StereoCameraDemo
+├── wrapper   
+│   └── ros
+│       └── src
+│           └── zkhy_stereo_d   
+├── cmake
+├── scripts
+└── Docs
+    ├── Chinese
+    └── English
 ```
 
 ## 编译和运行环境要求

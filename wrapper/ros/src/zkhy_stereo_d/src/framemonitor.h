@@ -10,9 +10,9 @@
 #include <utility>
 #include <sensor_msgs/PointCloud2.h>
 
-#include "smarter_eye_sdk/camerahandler.h"
-#include "smarter_eye_sdk/motiondata.h"
-#include "smarter_eye_sdk/calibrationparams.h"
+#include "camerahandler.h"
+#include "motiondata.h"
+#include "calibrationparams.h"
 #include "pointcloudgenerator.h"
 
 
@@ -24,8 +24,6 @@ public:
 
     // image handler func in recv qt thread of SATP Protocol(based on tcp)
     void handleRawFrame(const RawImageFrame *rawFrame);
-
-    void handleMotionData(const MotionData *motionData) override;
 
     // custom function for processing recieved frame data in handleRawFrame()
     void processFrame(const RawImageFrame *rawFrame);

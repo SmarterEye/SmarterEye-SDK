@@ -11,6 +11,7 @@ Online date | Version number | Update content
  2022.06.20 | v0.5.4 | Add Disparity2PointCloud 
  2022.06.22 | v0.5.5 | Add png format convertor for Disparity2PointCloud 
  2022.06.23 | v0.5.6 | Add time service of device interface 
+ 2022.07.15 | v0.5.7 | fixed ros wrapper get imu data bug 
 
 # Introduction
 
@@ -77,25 +78,45 @@ At present, all shipped devices have completed the calibration process and are i
 3. SmartEye SDK directory structure
 
 ```bash
-Sdk-Release_linux-g++_v0.2.33
-├── Runtime
-│ └── Bin
-└── Src
-└── SDK
-├── comm.pri
-├── Examples
-│ ├── Disparity2Real3dDemo
-│ ├── Disparity2RGBDemo
-│ ├── DisplayFramesDemo
-│ ├── GetCameraParamDemo
-│ ├── GetCompoundDemo
-│ ├── GetLaneExtDemo
-│ ├── GetMotionDataDemo
-│ ├── PointCloudDemo
-│ │── StereoCameraDemo
-│ └── GetDeviceInfoDemo
+SmarterEye-SDK
+├── 3rdParty
 ├── inc
-└── SatpExt
+├── StereoCamera
+├── ImageUtils
+├── MessageBus
+├── RealtimeDatabase
+├── RtdbManager
+├── RtdbService
+├── Satp
+├── SatpExt
+├── SeUdpClient
+├── Examples
+│    ├── BenchmarkClient
+│    ├── BenchmarkServer
+│    ├── Disparity2DepthDemo
+│    ├── Disparity2PointCloud
+│    ├── Disparity2Real3dDemo
+│    ├── Disparity2RGBDemo
+│    ├── DisplayFramesDemo
+│    ├── GetCameraParamDemo
+│    ├── GetCompoundDemo
+│    ├── GetDeviceInfoDemo
+│    ├── GetLaneExtDemo
+│    ├── GetMotionDataDemo
+│    ├── GetObstacleDemo
+│    ├── GetPerceptionDemo
+│    ├── ImageStorageDemo
+│    ├── PointCloudDemo
+│    ├── StereoCameraDemo
+├── wrapper   
+│   └── ros
+│       └── src
+│           └── zkhy_stereo_d   
+├── cmake
+├── scripts
+└── Docs
+    ├── Chinese
+    └── English
 ````
 
 ## Compiling and runnng environment
